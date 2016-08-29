@@ -103,8 +103,6 @@ module Elasticsearch
           field_to_update = provided_field_to_update
           parent_to_child_path = provided_parent_to_child_path
 
-          puts "#{child_class.name} updates #{@parent_class.name}'s #{field_to_update}"
-
           @nested_object_fields = @parent_class.__mapping_reflector__.nested_object_fields_for(parent_to_child_path).map(&:to_s)
           @has_dependent_fields = @parent_class.__dependency_tracker__.has_dependent_fields?(field_to_update) ||
             (@calculated_path && @calculated_path.first.destination.through_class == child_class && @parent_class.__dependency_tracker__.has_association_named?(field_to_update) && @parent_class.__mapping_reflector__.has_document_field_named?(field_to_update))

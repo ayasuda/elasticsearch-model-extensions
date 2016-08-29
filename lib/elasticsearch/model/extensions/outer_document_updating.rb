@@ -26,9 +26,6 @@ module Elasticsearch
 
               only_if = -> r { true }
 
-              puts "Parent: #{@parent_class.name}"
-              puts "Child: #{@child_class.name}"
-
               # 子cから親aへのパスが[:b, :a]のようなパスだったら、c.b.aのようにaを辿れるはずなので
               records_to_update_documents = begin
                 child_to_parent_path = Elasticsearch::Model::Extensions::OuterDocumentUpdating::ClassMethods::AssociationTraversal.shortest_path(from: child_class, to: parent_class)
